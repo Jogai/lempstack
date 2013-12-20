@@ -4,6 +4,7 @@ Cloned from Aatish Neupane.
 
 Optimized for gpEasy installations: https://github.com/oyejorge/gpEasy-CMS
 Including more imagick packages.
+No rewrite needed with this config for nice urls, just set define('gp_indexphp',false); 
 
 Read more over at Aatish Neupane's blog:
 http://linuxdo.blogspot.com/2012/08/optimized-lemp-installer-for.html
