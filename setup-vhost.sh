@@ -25,6 +25,11 @@ read www_create
 if [ "$www_create" == "n" ];then
 cat > "/etc/nginx/sites-available/$2.conf" <<END
 server {
+    server_name www.$2;
+    return 301 \$scheme://$2\$request_uri;
+}
+
+server {
     server_name $2;
     root /home/$1/www/;
     index index.php;
@@ -69,7 +74,12 @@ END
 else
 cat > "/etc/nginx/sites-available/$2.conf" <<END
 server {
-    server_name $2 www.$2;
+    server_name $2;
+    return 301 \$scheme://www.$2\$request_uri;
+}
+
+server {
+    server_name www.$2;
     root /home/$1/www/;
     index index.php;
  
@@ -106,10 +116,6 @@ server {
         }
     access_log  /var/log/nginx/$2-access.log;
     error_log  /var/log/nginx/$2-error.log;
-    if (\$host !~* www\.(.*)) {
-     rewrite ^(.*)\$ http://www.$2\$1 permanent;
-    }
-    
 }
 END
 fi
