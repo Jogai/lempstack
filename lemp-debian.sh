@@ -12,16 +12,6 @@ function check_root() {
 }
 check_root
 
-if [ `cat /etc/issue|awk 'NR==1 {print $1}'` != "Ubuntu" ];then
-cat > /etc/apt/sources.list.d/dotdeb.list <<END
-deb http://packages.dotdeb.org stable all
-deb-src http://packages.dotdeb.org stable all
-END
-wget http://www.dotdeb.org/dotdeb.gpg
-cat dotdeb.gpg | apt-key add -
-rm dotdeb.gpg
-fi
-apt-get update && apt-get upgrade
 apt-get remove apache2*
 
 apt-get install nginx mysql-server php5 php5-mysql php-apc php-pear php5-cgi php5-cli php5-common php5-curl php5-exactimage php5-ffmpeg php5-fpm php5-gd php5-imagick php5-imap php5-mcrypt php5-recode php5-json php5-tidy php5-xsl mcrypt imagemagick-common libmagickcore5 libmagickcore5-extra libmagickwand5 --no-install-recommends
